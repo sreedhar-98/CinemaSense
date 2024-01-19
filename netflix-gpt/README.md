@@ -1,3 +1,7 @@
+rafce --> to generate the html template for a component.
+
+
+
 NetflixGPT:
 
 1. npx create-react-app netflix-gpt
@@ -35,4 +39,6 @@ NetflixGPT:
             -Title and Description 
             - Movie Suggestions(Horizontally scrollable)
     - Login and create account navigation(if not logged in)
-    
+
+4. Setup Routing
+    - npm i -D reac-router-dom
