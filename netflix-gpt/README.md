@@ -41,4 +41,6 @@ NetflixGPT:
     - Login and create account navigation(if not logged in)
 
 4. Setup Routing
-    - npm i -D reac-router-dom
+    - npm i -D react-router-dom
+
+5. Build a login Form

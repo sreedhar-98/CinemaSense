@@ -2,12 +2,17 @@ import React from "react";
 import Login from "./Login";
 import Browse from "./Browse";
 import { createBrowserRouter, Route, RouterProvider } from "react-router-dom";
+import Facebook from "./Facebook";
 
 const Body = () => {
   const appRouter = createBrowserRouter([
     {
       path: "/",
       element: <Login />,
+    },
+    {
+      path:"fb",
+      element:<Facebook/>
     },
     {
       path: "/browse",
