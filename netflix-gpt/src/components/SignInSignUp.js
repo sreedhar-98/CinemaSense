@@ -1,6 +1,9 @@
 import React, { useRef, useState } from "react";
 import validate from "../utils/validate";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { auth } from "../utils/firebase";
 import errorLogo from "../utils/ErrorLogo.svg";
 
@@ -9,11 +12,12 @@ const SIgnInSignUp = () => {
   const [emailError, setemailError] = useState("");
   const [passwordError, setpasswordError] = useState("");
   const [signupError, setSignupError] = useState(null);
+  const [signinError, setSigninError] = useState(null);
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
 
-  const handleButtonClick = () => {
+  const handleButtonClick = async () => {
     const message = validate(email.current.value, password.current.value);
     if (message === 1) setemailError("Invalid Email Id");
     else if (message === 2) setpasswordError("Please Enter a valid Password");
@@ -31,13 +35,26 @@ const SIgnInSignUp = () => {
           .then((userCredential) => {
             // Signed up
             const user = userCredential.user;
-            console.log(user);
+            setSignupError(null);
           })
           .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
             setSignupError(errorCode);
-            console.log(errorMessage);
+          });
+      } else {
+        signInWithEmailAndPassword(
+          auth,
+          email.current.value,
+          password.current.value
+        )
+          .then((userCredential) => {
+            const user = userCredential.user;
+            setSigninError(null);
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            setSigninError(errorCode);
           });
       }
     }
@@ -57,11 +74,23 @@ const SIgnInSignUp = () => {
       {!isSignin && signupError !== null && (
         <div className="flex items-center justify-between w-10/12 px-4 py-4 mt-2 mb-4 bg-[#d89d31] mx-4">
           <img src={errorLogo} alt="LogoError" className="mr-4"></img>
-          {signupError === "auth/email-already-in-use" && (
+          {signupError === "auth/email-already-in-use" ? (
             <p className="text-lg">
               You are already registered. Sign in or reset your password
             </p>
+          ) : (
+            <p className="text-lg">
+              There is some error signing up. Please try again
+            </p>
           )}
+        </div>
+      )}
+      {isSignin && signinError !== null && (
+        <div className="flex items-center justify-between w-10/12 px-4 py-4 mt-2 mb-4 bg-[#d89d31] mx-4">
+          <img src={errorLogo} alt="LogoError" className="mr-4"></img>
+          <p className="text-lg">
+            Email or Password mismatch. Please try again or create a new account
+          </p>
         </div>
       )}
       {/* <div className="mb-4 px-6"> */}
