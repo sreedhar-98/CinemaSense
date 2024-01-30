@@ -1,9 +1,23 @@
-import React from 'react'
+import useNowPlayingMovies from "../hooks/useNowPlayingMovies";
+import Header from "./Header";
+import MainContainer from "./MainContainer";
+import UserIcon from "./UserIcon";
+import VideoBackground from "./VideoBackground";
 
-const Browse = () => {
+const Browse1 = () => {
+  useNowPlayingMovies();
+
   return (
-    <div>Browse</div>
-  )
-}
+    <div className="">
+      <div className="sticky">
+        <Header />
+        <div className="flex justify-end">
+          <UserIcon />
+        </div>
+      </div>
+     <MainContainer/>
+    </div>
+  );
+};
 
-export default Browse
+export default Browse1;

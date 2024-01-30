@@ -1,15 +1,16 @@
 import React from "react";
 import Header from "./Header";
 import SIgnInSignUp from "./SignInSignUp";
+import { bgImage } from "../utils/urls";
 
 const Login = () => {
   return (
     <div className="relative min-h-screen bg-black w-screen">
       <Header />
       <img
-        src="https://assets.nflxext.com/ffe/siteui/vlv3/16006346-87f9-4226-bc25-a1fb346a2b0c/9662d0fd-0547-4665-b887-771617268815/IN-en-20240115-popsignuptwoweeks-perspective_alpha_website_medium.jpg"
+        src={bgImage}
         alt="bgimage"
-        className="absolute w-full min-h-screen object-cover md:block hidden opacity-75"
+        className="absolute md:block hidden opacity-60"
       ></img>
       <SIgnInSignUp />
     </div>
