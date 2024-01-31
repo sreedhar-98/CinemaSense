@@ -6,7 +6,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import errorLogo from "../utils/ErrorLogo.svg";
+import errorLogo from "../utils/Svg/ErrorLogo.svg";
 
 const SIgnInSignUp = () => {
   const [isSignin, setisSignin] = useState(true);

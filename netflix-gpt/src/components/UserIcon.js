@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../utils/firebase";
 import { userIcons } from "../utils/urls";
-import ChevronUp from "../utils/ChevronUp.svg";
+import ChevronUp from "../utils/Svg/ChevronUp.svg";
 
 const UserIcon = () => {
   const [chevron, setChevron] = useState(false);
@@ -18,7 +18,7 @@ const UserIcon = () => {
 
   return (
     <div
-      className="absolute md:mr-32 mr-8 ml-4 group duration-200 z-50 mt-10"
+      className="absolute md:mr-32 mr-8 ml-4 group duration-200 z-40 mt-10"
       onMouseEnter={() => setChevron(true)}
       onMouseLeave={() => setChevron(false)}
     >
