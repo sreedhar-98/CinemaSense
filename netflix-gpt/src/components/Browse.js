@@ -3,9 +3,9 @@ import Header from "./Header";
 import MainContainer from "./MainContainer";
 import UserIcon from "./UserIcon";
 
+
 const Browse1 = () => {
   useNowPlayingMovies();
-
   return (
     <div className="">
       <div className="sticky z-50 top-0">

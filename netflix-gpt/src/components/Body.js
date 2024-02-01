@@ -4,6 +4,8 @@ import Browse from "./Browse";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Facebook from "./Facebook";
 
+import Test from "./Test";
+
 const Body = () => {
   const appRouter = createBrowserRouter([
     {
@@ -17,6 +19,10 @@ const Body = () => {
     {
       path: "/browse",
       element: <Browse />,
+    },
+    {
+      path: "/test",
+      element: <Test />,
     },
   ]);
 

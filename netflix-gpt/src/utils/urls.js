@@ -14,7 +14,7 @@ export const API_options = {
     }
   };
 
-export const nowPlayingURL="https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1&region=IN&include_video=true";
+export const nowPlayingURL="https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1&include_video=true&mute=1";
 
 export const BaseVideosURL= "https://api.themoviedb.org/3/movie/";
 

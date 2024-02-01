@@ -10,11 +10,12 @@ const MainContainer = () => {
   if (!nowPlayingMovies) return;
   const rand_ind = Math.floor(Math.random() * nowPlayingMovies.length);
   const VideoMovie = nowPlayingMovies[rand_ind];
+  console.log(VideoMovie);
 
-  const { original_title, overview, id } = VideoMovie;
+  const { original_title, overview, id, genre_ids } = VideoMovie;
   return (
     <div className="relative aspect-video">
-      <VideoTitle original_title={original_title} overview={overview} />
+      <VideoTitle original_title={original_title} overview={overview} genre_ids={genre_ids} />
       <VideoBackground id={id} />
     </div>
   );
