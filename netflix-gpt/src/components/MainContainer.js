@@ -8,9 +8,10 @@ const MainContainer = () => {
     (store) => store.movies?.nowPlayingMovies
   );
   if (!nowPlayingMovies) return;
+  console.log(nowPlayingMovies);
   const rand_ind = Math.floor(Math.random() * nowPlayingMovies.length);
   const VideoMovie = nowPlayingMovies[rand_ind];
-  console.log(VideoMovie);
+  //console.log(VideoMovie);
 
   const { original_title, overview, id, genre_ids } = VideoMovie;
   return (

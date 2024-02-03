@@ -1,10 +1,11 @@
 import React from 'react'
 import MovieCard from './MovieCard'
+import MovieList from './MovieList'
 
 const Test = () => {
   return (
-    <div>
-        <MovieCard movie={{
+    <div className='h-screen'>
+        {/* <MovieCard movie={{
     "adult": false,
     "backdrop_path": "/6OnoMgGFuZ921eV8v8yEyXoag19.jpg",
     "genre_ids": [
@@ -22,7 +23,8 @@ const Test = () => {
     "video": false,
     "vote_average": 7.196,
     "vote_count": 46
-}}/>
+}}/> */}
+    <MovieList/>
     </div>
   )
 }
