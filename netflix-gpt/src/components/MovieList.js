@@ -1,9 +1,10 @@
-import React, { useRef } from "react";
-import ChevronUp from "../utils/Svg/ChevronUp.svg";
+import React, { useRef, useState } from "react";
 import MovieCard from "./MovieCard";
+import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 
 const MovieList = () => {
   const navRef = useRef();
+  const [hideleft, sethideleft] = useState(true);
 
   const title = "Now Playing";
   const movies = [
@@ -348,53 +349,49 @@ const MovieList = () => {
       vote_count: 376,
     },
   ];
-
-  const handleNav = (direction) => {
+  const slideLeft = () => {
     if (navRef.current) {
-      const scrollAmount = 200;
-      if (direction === "left") {
-        navRef.current.scrollBy({
-          left: scrollAmount,
-          behavior: "smooth",
-        });
-      } else {
-        navRef.current.scrollBy({
-          left: -scrollAmount,
-          behavior: "smooth",
-        });
+      console.log(navRef.current.scrollLeft);
+      if (navRef.current.scrollLeft === 0) sethideleft(true);
+      else {
+        sethideleft(false);
       }
+
+      return (navRef.current.scrollLeft -= 400);
+    } else {
+      return null;
+    }
+  };
+
+  const slideRight = () => {
+    if (navRef.current) {
+      return (navRef.current.scrollLeft += 400);
+    } else {
+      return null;
     }
   };
 
   return (
-    <div className="relative w-11/12 h-4/6">
+    <div className="relative w-11/12 h-auto mt-4">
       <h1 className="text-xl font-bold my-2 mx-4">{title}</h1>
-      <div className="h-full flex overflow-x-scroll p-2">
-        <div className="relative gap-2 flex flex-shrink-0" ref={navRef}>
-          {movies?.map((movie) => (
-            <MovieCard movie={movie} key={movie.id} />
-          ))}
+      <div className="flex gap-3 items-center h-full">
+        {!hideleft && (
+          <div className="">
+            <MdChevronLeft size={50} onClick={() => slideLeft()} />
+          </div>
+        )}
+        <div
+          className="h-full flex overflow-x-scroll p-2 scroll whitespace-nowrap scroll-smooth"
+          ref={navRef}
+        >
+          <div className="relative gap-2 flex flex-shrink-0">
+            {movies?.map((movie) => (
+              <MovieCard movie={movie} key={movie.id} />
+            ))}
+          </div>
         </div>
-        <div className="items-center absolute h-[45%] w-16 bg-red-700  opacity-90 z-50 left-0">
-          <img
-            src={ChevronUp}
-            alt="ChevronIcon"
-            className="w-[80%] h-[85%] -rotate-90"
-            onClick={() => handleNav("left")}
-          ></img>
-        </div>
-        <div className="flex items-center absolute h-[45%] w-16 bg-red-700  opacity-90 right-0 z-50">
-          <img
-            src={ChevronUp}
-            alt="ChevronIcon"
-            className="w-[80%] h-[85%] rotate-90"
-            onClick={() => {
-              if (navRef.current) {
-                navRef.current.scrollLeft = handleNav("right");
-              }
-              handleNav("right");
-            }}
-          ></img>
+        <div className="">
+          <MdChevronRight size={50} onClick={() => slideRight()} />
         </div>
       </div>
     </div>

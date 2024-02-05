@@ -17,7 +17,7 @@ const MovieCard = ({ movie }) => {
   return (
     // <div className="relative h-screen flex flex-col justify-center left-[50%]">
     <div className="">
-      <div className="relative group/card bg-black flex flex-col gap-1 hover:scale-150 duration-200 rounded-md  hover:z-50 overflow-hidden flex-shrink-0">
+      <div className="relative group/card bg-black flex flex-col gap-1 hover:scale-110 duration-200 rounded-md  hover:z-50 overflow-hidden flex-shrink-0">
         <img src={url} alt="Img" className="object-cover w-32"></img>
         <div className="relative hidden group-hover/card:block bg-slate-800 w-32">
           <div className="flex flex-wrap gap-2 items-center">
