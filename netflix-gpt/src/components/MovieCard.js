@@ -16,10 +16,10 @@ const MovieCard = ({ movie }) => {
   const url = posterURL + poster_path;
   return (
     // <div className="relative h-screen flex flex-col justify-center left-[50%]">
-    <div className="">
+    <div className="w-32">
       <div className="relative group/card bg-black flex flex-col gap-1 hover:scale-110 duration-200 rounded-md  hover:z-50 overflow-hidden flex-shrink-0">
-        <img src={url} alt="Img" className="object-cover w-32"></img>
-        <div className="relative hidden group-hover/card:block bg-slate-800 w-32">
+        <img src={url} alt="Img" className="object-cover w-full"></img>
+        <div className="relative hidden group-hover/card:block bg-slate-800 w-full">
           <div className="flex flex-wrap gap-2 items-center">
             <div className="flex gap-1 mx-2 my-2 flex-wrap mb-2">
               <img src={star} alt="starlogo" className="w-4 h-4"></img>

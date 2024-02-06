@@ -3,8 +3,8 @@ import MovieCard from "./MovieCard";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 
 const MovieList = () => {
+  //console.log(movies);
   const navRef = useRef();
-  const [hideleft, sethideleft] = useState(true);
 
   const title = "Now Playing";
   const movies = [
@@ -349,39 +349,38 @@ const MovieList = () => {
       vote_count: 376,
     },
   ];
-  const slideLeft = () => {
-    if (navRef.current) {
-      console.log(navRef.current.scrollLeft);
-      if (navRef.current.scrollLeft === 0) sethideleft(true);
-      else {
-        sethideleft(false);
-      }
 
-      return (navRef.current.scrollLeft -= 400);
-    } else {
-      return null;
+console.log(navRef.current?.scrollLeft);
+ const slide=(direction)=>{
+  if(direction==='left'){
+    if(navRef.current) {
+      navRef.current.scrollLeft-=500;
+      return navRef.current.scrollLeft;
     }
-  };
+    else return 0;
+  }
+  else{
+    if(navRef.current){
+      navRef.current.scrollLeft+=500;
+      return navRef.current.scrollLeft;
+    }
+    else return 0;
 
-  const slideRight = () => {
-    if (navRef.current) {
-      return (navRef.current.scrollLeft += 400);
-    } else {
-      return null;
-    }
-  };
+  }
+ 
+ }
 
   return (
-    <div className="relative w-11/12 h-auto mt-4">
-      <h1 className="text-xl font-bold my-2 mx-4">{title}</h1>
+    <div className="relative w-11/12 h-[21rem] ml-4">
+      <h1 className="mx-4 text-xl font-bold my-2 text-white">{title}</h1>
       <div className="flex gap-3 items-center h-full">
-        {!hideleft && (
+        {(
           <div className="">
-            <MdChevronLeft size={50} onClick={() => slideLeft()} />
+            <MdChevronLeft size={50} color="white" onClick={() => slide('left')} />
           </div>
         )}
         <div
-          className="h-full flex overflow-x-scroll p-2 scroll whitespace-nowrap scroll-smooth"
+          className="h-full flex overflow-x-scroll p-2 scroll whitespace-nowrap scroll-smooth overscroll-auto [&::-webkit-scrollbar]:hidden"
           ref={navRef}
         >
           <div className="relative gap-2 flex flex-shrink-0">
@@ -391,7 +390,7 @@ const MovieList = () => {
           </div>
         </div>
         <div className="">
-          <MdChevronRight size={50} onClick={() => slideRight()} />
+          <MdChevronRight size={50} color="white" onClick={() => slide('right')} />
         </div>
       </div>
     </div>
@@ -399,3 +398,5 @@ const MovieList = () => {
 };
 
 export default MovieList;
+
+

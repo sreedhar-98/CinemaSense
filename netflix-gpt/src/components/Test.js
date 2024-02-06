@@ -1,6 +1,7 @@
 import React from 'react'
 import MovieCard from './MovieCard'
 import MovieList from './MovieList'
+import SecondaryContainer from './SecondaryContainer'
 
 const Test = () => {
   return (
@@ -24,7 +25,7 @@ const Test = () => {
     "vote_average": 7.196,
     "vote_count": 46
 }}/> */}
-    <MovieList/>
+    <SecondaryContainer/>
     </div>
   )
 }
