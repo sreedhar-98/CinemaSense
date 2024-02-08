@@ -8,7 +8,7 @@ const Browse1 = () => {
   useNowPlayingMovies();
   return (
     <div className="bg-black">
-      <div className="sticky z-50 top-0">
+      <div className="sticky z-[60] top-0">
         <Header />
         <div className="flex justify-end">
           <UserIcon />
