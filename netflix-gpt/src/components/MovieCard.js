@@ -1,22 +1,23 @@
-import React from "react";
+import React, { forwardRef, memo } from "react";
 import star from "../utils/Svg/star.svg";
 import ChevronUp from "../utils/Svg/ChevronUp.svg";
 import addIcon from "../utils/Svg/addIcon.svg";
 import Genres from "../utils/Genres.json";
 import { posterURL } from "../utils/urls";
 
-const MovieCard = ({ movie }) => {
-  //console.log(movie);
+const MovieCard = memo(forwardRef(({ movie }, ref) => {
   const { poster_path, genre_ids, vote_average } = movie;
   const genres_list = Genres.genres;
   const genres = genre_ids.map((id) => {
     let genre = genres_list.find((item) => item.id === id);
     return genre?.name;
   });
+  console.count('Count');
+
   const url = posterURL + poster_path;
   return (
     // <div className="relative h-screen flex flex-col justify-center left-[50%]">
-    <div className="w-32">
+    <div className="w-32" ref={ref}>
       <div className="relative group/card bg-black flex flex-col gap-1 hover:scale-110 duration-200 rounded-md  hover:z-50 overflow-hidden flex-shrink-0">
         <img src={url} alt="Img" className="object-cover w-full"></img>
         <div className="relative hidden group-hover/card:block bg-slate-800 w-full">
@@ -26,7 +27,7 @@ const MovieCard = ({ movie }) => {
               <span className="text-xs  text-white">
                 {Math.round(vote_average * 10) / 10}
               </span>
-            </div>
+            </div> 
             <div className="group/icon relative flex flex-col gap-2 items-center">
               <img src={addIcon} alt="message-box" className="w-5 h-5"></img>
               <div className="absolute bg-[#aaaaaa] rounded-sm -top-6 w-28 text-center hidden group-hover/icon:block">
@@ -46,13 +47,13 @@ const MovieCard = ({ movie }) => {
           </div>
           <div className="flex flex-wrap gap-2 text-white text-sm mx-2">
             {genres.map((genre) => {
-              return <p> {genre}</p>;
+              return <p key={genre}> {genre}</p>;
             })}
           </div>
         </div>
       </div>
     </div>
   );
-};
+}));
 
 export default MovieCard;

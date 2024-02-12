@@ -1,8 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userReducer from "./userSlice";
-import moviesReducer from "./moviesSlice";
+import moviesApi from "./moviesApi";
 
 const appStore = configureStore({
-  reducer: { user: userReducer, movies: moviesReducer },
+  reducer: {
+    [moviesApi.reducerPath]: moviesApi.reducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(moviesApi.middleware),
 });
 export default appStore;
