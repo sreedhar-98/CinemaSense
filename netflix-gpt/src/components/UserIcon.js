@@ -18,7 +18,7 @@ const UserIcon = () => {
 
   return (
     <div
-      className="absolute md:mr-32 mr-8 ml-4 group duration-200 z-40 mt-10"
+      className="relative ml-4 group duration-200 mr-6"
       onMouseEnter={() => setChevron(true)}
       onMouseLeave={() => setChevron(false)}
     >

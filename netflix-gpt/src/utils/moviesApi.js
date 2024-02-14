@@ -31,11 +31,13 @@ const moviesApi = createApi({
         }
       },
       forceRefetch({ currentArg, previousArg }) {
-        return currentArg?.page !== previousArg?.page;
+        return currentArg?.page > previousArg?.page;
       },
     }),
   }),
 });
 
 export const { useGetMoviesQuery } = moviesApi;
+
+export const useGetMoviesState=moviesApi.endpoints.getMovies.useQueryState;
 export default moviesApi;

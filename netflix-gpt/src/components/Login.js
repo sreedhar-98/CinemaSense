@@ -3,7 +3,9 @@ import Header from "./Header";
 import SIgnInSignUp from "./SignInSignUp";
 import { bgImage } from "../utils/urls";
 
+
 const Login = () => {
+
   return (
     <div className="relative min-h-screen bg-black w-screen">
       <Header />

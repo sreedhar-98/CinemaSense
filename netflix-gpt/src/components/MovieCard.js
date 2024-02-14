@@ -12,7 +12,7 @@ const MovieCard = memo(forwardRef(({ movie }, ref) => {
     let genre = genres_list.find((item) => item.id === id);
     return genre?.name;
   });
-  console.count('Count');
+  // console.count('Count');
 
   const url = posterURL + poster_path;
   return (

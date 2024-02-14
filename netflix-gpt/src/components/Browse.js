@@ -4,24 +4,32 @@ import MainContainer from "./MainContainer";
 import SecondaryContainer from "./SecondaryContainer";
 import UserIcon from "./UserIcon";
 
+import SearchBar from "./SearchBar";
+
+
+
 const Browse1 = () => {
-  const [gptSearch,setGptSearch] = useState(false);
+  const [gptSearch, setGptSearch] = useState(false);
   return (
     <div className="bg-black min-h-screen">
-      <>
-      <div className="sticky z-[60] top-0">
+      <div className="sticky z-[70] top-0 w-full">
         <Header />
-        <div className="flex justify-end">
-          <button className="absolute bg-blue-600 md:px-6 md:py-4 px-4 py-2 rounded-lg border border-white md:mr-48 mr-24 md:mt-6 mt-8 text-white" 
-          onClick={()=>setGptSearch(prevState=> !prevState)}>GPT Search</button>
+        <div className="flex absolute md:right-16 right-1 justify-between md:mt-10 mt-6 items-center gap-3">
+        <button className="bg-blue-500 border border-white px-6 rounded-lg py-2" onClick={()=>setGptSearch(prevState=>!prevState)}>{gptSearch? "Home" : "AI Search"}</button>
           <UserIcon />
+          
         </div>
       </div>
-      </>
-      {!gptSearch && (<div className="flex flex-col">
-        <MainContainer />
-        <SecondaryContainer />
-      </div>)}
+
+      {gptSearch && <SearchBar/>}
+
+      {!gptSearch && (
+        <div className="flex flex-col">
+          <MainContainer />
+          <SecondaryContainer />
+        </div>
+      )}
+      
     </div>
   );
 };

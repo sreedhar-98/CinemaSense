@@ -25,7 +25,7 @@ const Header = () => {
       <img
         src={netflixLogo}
         alt="Logo"
-        className="w-32 md:w-40 md:mt-3 pl-1 pt-3 mt-4 mb-3"
+        className="w-32 md:w-40  pl-1 pt-3  mb-3 mt-2"
       ></img>
     </div>
   );
