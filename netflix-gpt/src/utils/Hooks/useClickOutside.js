@@ -4,7 +4,7 @@ const useClickOutside = (handler) => {
   const inpRef = useRef(null);
 
   useEffect(() => {
-    console.log("Inside UseEffect");
+    //console.log("Inside UseEffect");
     const clickHandler = (event) => {
       if (!inpRef.current.contains(event.target)) handler();
     };

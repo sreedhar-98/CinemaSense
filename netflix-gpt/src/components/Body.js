@@ -4,8 +4,8 @@ import Browse from "./Browse";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Facebook from "./Facebook";
 
-
 import Test from "./Test";
+import Testing from "./Testing";
 
 const Body = () => {
   const appRouter = createBrowserRouter([
@@ -15,7 +15,7 @@ const Body = () => {
     },
     {
       path: "fb",
-      element: <Facebook />,
+      element: <Testing />,
     },
     {
       path: "/browse",
@@ -23,10 +23,9 @@ const Body = () => {
     },
     {
       path: "/test",
-      element: <Test />,
+      element: <Testing />,
     },
   ]);
-
 
   return (
     <div>

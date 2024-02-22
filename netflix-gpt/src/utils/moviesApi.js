@@ -23,7 +23,6 @@ const moviesApi = createApi({
         }
         return args;
       },
-      //transformResponse:(response)=>{return response.results},
       merge: (CurrentState, incomingState) => {
         if (CurrentState.results) {
           CurrentState.page = incomingState?.page;

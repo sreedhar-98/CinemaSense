@@ -27,3 +27,5 @@ export const addToListIcon = "https://img.icons8.com/ios/50/000000/add--v1.png";
 export const posterURL = "http://image.tmdb.org/t/p/w185";
 
 export const AUTH_TMDB = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMzc1MjY4ZTI3OWRlMTY4YTkxZjc1M2Y3ODE0Njc0YSIsInN1YiI6IjY1Yjg5NjIyZjkwYjE5MDE3YzA0NTE0NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.MjFETm2EJ1_CoSb4djS0WYDQV8Xnmf7RrB3SgPuRiog";
+
+export const AI_API="AIzaSyBMmavUtAeDKyg5iBYkgp4eG8_IBWPwGTA"
