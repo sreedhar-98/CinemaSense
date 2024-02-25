@@ -1,28 +1,33 @@
 import React, { useCallback, useRef, useState } from "react";
 import useClickOutside from "../utils/Hooks/useClickOutside";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { AWS_URL } from "../utils/urls";
+import { addMovies } from "../utils/gptSearchSlice";
 
 const Test = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const outsideClickHandler = useCallback(() => setIsExpanded(false), []);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const refNode = useClickOutside(outsideClickHandler);
   const prompt = useRef();
+  const dispatch = useDispatch();
   const handleSearchClick = async () => {
-    // if (prompt.current) {
-    //   const res = await fetch(
-    //     "https://juiy5mhdit6ewqae3fsl4uvoei0sivqj.lambda-url.ap-south-1.on.aws/",
-    //     {
-    //       method: "POST",
-    //       body: JSON.stringify({ "prompt": prompt.current.value }),
-    //     }
-    //   );
-    //   const data=await res.json()
-    //   //console.log(data);
-    //  
-      
-    // }
     navigate('/fb');
+    try {
+      if (prompt.current) {
+        const res = await fetch(AWS_URL, {
+          method: "POST",
+          body: JSON.stringify({ prompt: prompt.current.value }),
+        });
+        
+        const data = await res.json();
+        dispatch(addMovies({ movies: data?.data?.matches }));
+        
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

@@ -8,7 +8,6 @@ const Header = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const unsubscribe=onAuthStateChanged(auth, (user) => {
-      console.log("Called");
       if (user) {
         //Signed in
         navigate("/browse");

@@ -6,6 +6,7 @@ import Facebook from "./Facebook";
 
 import Test from "./Test";
 import Testing from "./Testing";
+import ShimmerCard from "./ShimmerCard";
 
 const Body = () => {
   const appRouter = createBrowserRouter([
@@ -23,7 +24,7 @@ const Body = () => {
     },
     {
       path: "/test",
-      element: <Testing />,
+      element: <ShimmerCard />,
     },
   ]);
 

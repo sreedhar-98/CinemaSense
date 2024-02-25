@@ -1,46 +1,50 @@
 import React from "react";
 import addIcon from "../utils/Svg/addIcon.svg";
 import { CircularProgressbar } from "react-circular-progressbar";
+import { poster_Path } from "../utils/urls";
 
-const SearchMovieCard = () => {
+const SearchMovieCard = ({movie}) => {
   return (
-    <div className="relative md:mx-8 md:mt-[10%] mx-2 mt-[20%]">
-      <h1 className="text-white md:text-2xl text-lg font-bold">Recommended</h1>
-      <div className="md:mx-2 my-[5%] w-[55%] border border-blue-700 rounded-lg">
-        <div className="flex gap-4 md:mx-3 mx-2 items-center">
+      <div className="relative md:mx-2 my-[3%] w-[85%] border border-blue-700 rounded-lg">
+        <div className="md:flex md:flex-row flex-col gap-4 md:mx-3 mx-2 items-center justify-between" id="description">
           <img
-            src="https://image.tmdb.org/t/p/original/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg"
+            src={poster_Path+movie?.metadata?.poster_path}
             alt="posterImage"
-            className="md:w-32 md:h-48 w-20 h-36"
+            className="md:w-[30%] md:h-72 w-40 h-45"
           ></img>
 
-          <div className="flex flex-col gap-1 my-2">
-            <h1 className="text-white text-xl font-bold">
-              The Shawshank Redemption (1994)
+          <div className="flex flex-col gap-1 my-2 w-[70%]">
+            <h1 className="text-white md:text-xl text-sm font-bold">
+              {`${movie?.metadata?.original_title} (${parseInt(movie?.metadata?.release_date)})`}
             </h1>
-            <div className="flex gap-1 text-white text-sm">
-              <span className=""> 10/14/1994 </span>
-              <p>⚪ Drama, Crime</p>
+            <div className="flex gap-1 text-white md:text-sm text-xs">
+              <span className=""> {movie?.metadata?.release_date} </span>
+              <p>⚪ {movie?.metadata?.genre_ids}</p>
             </div>
             <div className="flex gap-2 text-white mt-6 items-center">
-              <div className="w-28 flex gap-2 items-center">
-                <CircularProgressbar value={87} text={"87%"} />
-                <span className="text-sm">User Score</span>
+              <div className="md:w-28 w-20 flex gap-2 items-center">
+                <CircularProgressbar value={movie?.metadata?.vote_average*10} text={`${movie?.metadata?.vote_average*10}%`} />
+                <span className="md:text-sm text-xs">User Score</span>
               </div>
               <div className="group/icon relative flex flex-col gap-2 items-center ml-4">
-                <img src={addIcon} alt="message-box" className="w-7 h-7"></img>
+                <img src={addIcon} alt="message-box" className="md:w-7 md:h-7 h-4 w-4"></img>
                 <div className="absolute bg-[#aaaaaa] rounded-sm -top-6 w-28 text-center hidden group-hover/icon:block">
                   <p className="text-black text-sm">Add to My List</p>
                 </div>
               </div>
             </div>
-            <div className="text-white text-lg mt-5 ml-4">
+            <div className="text-white text-lg mt-5 flex flex-col gap-2">
               <h1 className="font-bold">Overview</h1>
+              <div className="w-[100%] ">
+              <p className="md:text-base text-sm" >
+                  {movie?.metadata?.overview}
+                </p>
+               
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
   );
 };
 
