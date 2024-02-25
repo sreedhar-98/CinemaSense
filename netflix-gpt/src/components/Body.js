@@ -2,11 +2,8 @@ import React from "react";
 import Login from "./Login";
 import Browse from "./Browse";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Facebook from "./Facebook";
-
-import Test from "./Test";
-import Testing from "./Testing";
 import ShimmerCard from "./ShimmerCard";
+import GptResultsPage from "./GptResultsPage";
 
 const Body = () => {
   const appRouter = createBrowserRouter([
@@ -15,8 +12,8 @@ const Body = () => {
       element: <Login />,
     },
     {
-      path: "fb",
-      element: <Testing />,
+      path: "/gptSearch",
+      element: <GptResultsPage />,
     },
     {
       path: "/browse",

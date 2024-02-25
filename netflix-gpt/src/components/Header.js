@@ -3,17 +3,26 @@ import { netflixLogo } from "../utils/urls";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser, removeUser } from "../utils/userSlice";
+import { clearMovies } from "../utils/gptSearchSlice";
 
 const Header = () => {
   const navigate = useNavigate();
+  const dispatch=useDispatch()
   useEffect(() => {
     const unsubscribe=onAuthStateChanged(auth, (user) => {
+      console.log("Called");
       if (user) {
         //Signed in
-        navigate("/browse");
+        const { uid, email, displayName } = user;
+        dispatch(addUser({ uid, email, displayName }));
+        
       } else {
         //Signed out
         navigate("/");
+        dispatch(removeUser());
+        dispatch(clearMovies());
       }
     });
     return ()=> unsubscribe();

@@ -13,7 +13,7 @@ const Test = () => {
   const prompt = useRef();
   const dispatch = useDispatch();
   const handleSearchClick = async () => {
-    navigate('/fb');
+    navigate('/gptSearch');
     try {
       if (prompt.current) {
         const res = await fetch(AWS_URL, {

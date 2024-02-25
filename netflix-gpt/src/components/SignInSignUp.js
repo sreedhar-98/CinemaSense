@@ -7,6 +7,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import errorLogo from "../utils/Svg/ErrorLogo.svg";
+import { useNavigate } from "react-router-dom";
 
 const SIgnInSignUp = () => {
   const [isSignin, setisSignin] = useState(true);
@@ -14,11 +15,13 @@ const SIgnInSignUp = () => {
   const [passwordError, setpasswordError] = useState("");
   const [signupError, setSignupError] = useState(null);
   const [signinError, setSigninError] = useState(null);
+  const navigate=useNavigate();
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
 
   const handleButtonClick = async () => {
+    
     const message = validate(email.current.value, password.current.value);
     if (message === 1) setemailError("Invalid Email Id");
     else if (message === 2) setpasswordError("Please Enter a valid Password");
@@ -36,6 +39,7 @@ const SIgnInSignUp = () => {
           .then(async (userCredential) => {
             // Signed up
             setSignupError(null);
+            navigate('/browse');
             await updateProfile(auth.currentUser,{displayName:name.current.value});
 
           })
@@ -51,6 +55,7 @@ const SIgnInSignUp = () => {
         )
           .then((userCredential) => {
             setSigninError(null);
+            navigate('/browse');
           })
           .catch((error) => {
             const errorCode = error.code;
