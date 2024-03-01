@@ -3,6 +3,7 @@ import star from "../utils/Svg/star.svg";
 import ChevronUp from "../utils/Svg/ChevronUp.svg";
 import addIcon from "../utils/Svg/addIcon.svg";
 import Genres from "../utils/Genres.json";
+import Checkmark from "../utils/Svg/checkmark.svg";
 import { posterURL } from "../utils/urls";
 import { useAddMovieMutation } from "../utils/list_api";
 import { useSelector } from "react-redux";
@@ -28,7 +29,7 @@ const MovieCard = memo(
     });
     const db_movie = {
       poster_path,
-      genre_ids: genres,
+      genre_ids: genres.join(", "),
       id: movie.id.toString(),
       vote_average: movie.vote_average.toString(),
       overview,
@@ -56,9 +57,9 @@ const MovieCard = memo(
                   {Math.round(vote_average * 10) / 10}
                 </span>
               </div>
-              <div className="group/icon relative flex flex-col gap-2 items-center">
+              <div className="group/icon relative flex flex-col gap-2 items-center border rounded-full border-[#808080] hover:border-white">
                 <img
-                  src={addIcon}
+                  src={Checkmark}
                   alt="message-box"
                   className="w-5 h-5"
                   onClick={addMovieHandler}

@@ -4,11 +4,15 @@ import SearchMovieCard from "./SearchMovieCard";
 import { ShimmerContentBlock } from "react-shimmer-effects";
 import BrowseHeader from "./BrowseHeader";
 import HomeNavigate from "./HomeNavigate";
+import { useSelector } from "react-redux";
 
 const MyList = () => {
-  const { isError, isFetching, data } = useGetMoviesDataQuery({
-    uid: "dw84WO7AuIfJLSZ87AH0p2gFk7u2",
-  });
+  const user_data= useSelector((store)=>store.user);
+
+  const { isFetching, data } = useGetMoviesDataQuery({
+    uid: user_data.data?.uid
+  },{skip:user_data.data?.uid?false:true});
+  if(!data) return;
   return (
     <div className="bg-black min-h-screen flex flex-col gap-3">
       <BrowseHeader childComponent={<HomeNavigate inGPTSearch={false}/>}/>
@@ -16,14 +20,7 @@ const MyList = () => {
         <h1 className="text-white md:text-2xl text-lg font-bold md:mx-8 md:mt-[10%] mx-2 mt-[20%]">
           My List
         </h1>
-        {data?.movies ? (
-          <div className="flex flex-col">
-            {data.movies.map((movie) => (
-              <SearchMovieCard movie={movie} key={movie?.id} />
-            ))}
-          </div>
-        ) : (
-          <div className="md:mx-2 my-[3%] w-[85%]">
+      {isFetching?( <div className="md:mx-2 my-[3%] w-[85%]">
             {[...Array(2)].map(() => (
               <ShimmerContentBlock
                 title
@@ -33,8 +30,11 @@ const MyList = () => {
                 thumbnailHeight={470}
               />
             ))}
-          </div>
-        )}
+          </div>) : (<div className="flex flex-col">
+            {data.movies.map((movie)=>(
+              <SearchMovieCard movie={movie} key={movie.id}/>
+            ))}
+          </div>)}
       </div>
     </div>
   );
