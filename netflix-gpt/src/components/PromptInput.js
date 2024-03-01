@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { AWS_URL } from "../utils/urls";
 import { addMovies } from "../utils/gptSearchSlice";
 
-const Test = () => {
+const PromptInput = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const outsideClickHandler = useCallback(() => setIsExpanded(false), []);
   const navigate = useNavigate();
@@ -59,4 +59,4 @@ const Test = () => {
   );
 };
 
-export default Test;
+export default PromptInput;

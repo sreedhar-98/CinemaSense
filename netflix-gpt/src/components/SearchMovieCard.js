@@ -4,7 +4,6 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import { poster_Path } from "../utils/urls";
 
 const SearchMovieCard = ({movie}) => {
-  console.log(movie);
   if(movie?.metadata){
     movie=movie.metadata;
   }

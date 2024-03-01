@@ -1,24 +1,14 @@
-
-import Header from "./Header";
+import BrowseHeader from "./BrowseHeader";
 import MainContainer from "./MainContainer";
+import PromptInput from "./PromptInput";
 import SecondaryContainer from "./SecondaryContainer";
-import UserIcon from "./UserIcon";
 
-import Test from "./Test";
-import MyList from "./MyList";
+
 
 const Browse1 = () => {
   return (
     <div className="bg-black min-h-screen">
-      <div className="sticky z-[70] top-0 w-full">
-        <Header />
-        <div className="flex absolute md:w-[55%] items-center md:right-4 md:my-5 justify-end md:gap-3 my-3 right-0 w-[70%] gap-0">
-          <Test/>
-          <div className="md:mr-[8%] mr-[6%]">
-          <UserIcon />
-          </div>
-        </div>
-      </div>
+     <BrowseHeader childComponent={<PromptInput/>} />
       <div className="flex flex-col">
         <MainContainer />
         <SecondaryContainer />
