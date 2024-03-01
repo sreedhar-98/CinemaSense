@@ -10,7 +10,7 @@ const VideoTitle = ({ original_title, overview, genre_ids }) => {
     return genre?.name; 
   }).join(',');
   return (
-    <div className="sm:flex flex-col absolute mt-[10%] hidden sm:mt-[20%] md:mt-[20%] ml-[10%] w-[50%] md:w-[90%] gap-1 md:gap-4 z-[40]">
+    <div className="sm:flex flex-col absolute mt-[10%] hidden sm:mt-[20%] md:mt-[20%] ml-[10%] w-[50%] md:w-[70%] gap-1 md:gap-4 z-[40]">
       <div className="flex flex-col gap-1 md:gap-2 rounded-lg bg-gradient-to-r from-black  w-[40%] px-4 md:px-10 group duration-1000 hover:scale-125 hover:-translate-y-4">
         <h1 className="text-white md:text-xl lg:text-3xl font-bold uppercase pt-2">
           {original_title}

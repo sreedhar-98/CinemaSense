@@ -8,6 +8,7 @@ import {
 import { auth } from "../utils/firebase";
 import errorLogo from "../utils/Svg/ErrorLogo.svg";
 import { useNavigate } from "react-router-dom";
+import create_entry from "../utils/create_entry";
 
 const SIgnInSignUp = () => {
   const [isSignin, setisSignin] = useState(true);
@@ -19,6 +20,8 @@ const SIgnInSignUp = () => {
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
+
+
 
   const handleButtonClick = async () => {
     
@@ -40,6 +43,7 @@ const SIgnInSignUp = () => {
             // Signed up
             setSignupError(null);
             navigate('/browse');
+            create_entry(auth.currentUser['uid']);
             await updateProfile(auth.currentUser,{displayName:name.current.value});
 
           })

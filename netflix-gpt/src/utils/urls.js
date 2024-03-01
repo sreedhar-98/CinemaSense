@@ -31,3 +31,7 @@ export const AUTH_TMDB = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMzc1MjY4ZTI3OWRlMTY4Y
 export const AWS_URL="https://juiy5mhdit6ewqae3fsl4uvoei0sivqj.lambda-url.ap-south-1.on.aws"
 
 export const poster_Path="https://image.tmdb.org/t/p/original";
+
+export const AWS_USER_ENTRY_URL="https://6wutgjhtaeaizj777yjwaq2jpa0kgjnl.lambda-url.ap-south-1.on.aws/";
+
+export const LIST_BASE_URL="https://nrpfe4wakh.execute-api.ap-south-1.amazonaws.com";

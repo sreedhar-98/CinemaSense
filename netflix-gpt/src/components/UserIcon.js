@@ -15,6 +15,7 @@ const UserIcon = () => {
       })
       .catch((error) => {});
   };
+  const handleMyList = () => navigate("/test");
 
   return (
     <div
@@ -57,11 +58,14 @@ const UserIcon = () => {
         </p>
         <div className="w-16 md:w-32 sm:w-24 bg-red-100 rounded-xl">
           <ul className="flex flex-col items-center justify-between list-none text-xs sm:text-sm">
-            <li className="md:p-2 p-1 text-red-500 font-bold border-b border-red-400 cursor-pointer hover:scale-105 hover:text-red-600">
-              Account
+            <li
+              className="md:p-2 p-1 text-red-500 font-bold border-b border-red-400 cursor-pointer hover:scale-105 hover:text-red-600"
+              onClick={handleMyList}
+            >
+              My List
             </li>
             <li className="md:p-2 p-1 text-red-500 font-bold border-b border-red-400 cursor-pointer hover:scale-105 hover:text-red-600">
-              Settings
+              Account
             </li>
             <li
               className="md:p-2 p-1 text-red-500 font-bold cursor-pointer hover:scale-105 hover:text-red-600"

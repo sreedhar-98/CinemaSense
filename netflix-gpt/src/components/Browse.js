@@ -5,6 +5,7 @@ import SecondaryContainer from "./SecondaryContainer";
 import UserIcon from "./UserIcon";
 
 import Test from "./Test";
+import MyList from "./MyList";
 
 const Browse1 = () => {
   return (

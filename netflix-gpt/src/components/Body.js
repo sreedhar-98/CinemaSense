@@ -9,6 +9,7 @@ import { auth } from "../utils/firebase";
 import { addUser, removeUser } from "../utils/userSlice";
 import { clearMovies } from "../utils/gptSearchSlice";
 import Protected from "./Protected";
+import MyList from "./MyList";
 
 const Body = () => {
   const appRouter = createBrowserRouter([
@@ -34,7 +35,7 @@ const Body = () => {
     },
     {
       path: "/test",
-      element: <Login />,
+      element: <MyList />,
     },
   ]);
   const dispatch = useDispatch();
