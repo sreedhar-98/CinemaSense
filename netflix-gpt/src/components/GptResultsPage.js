@@ -19,7 +19,7 @@ const GptResultsPage = () => {
         {movies ? (
           <div className="flex flex-col">
             {movies.map((movie) => (
-              <SearchMovieCard movie={movie} key={movie?.id} />
+              <SearchMovieCard movie={movie} key={movie?.id} isAdd={true} />
             ))}
           </div>
         ) : (

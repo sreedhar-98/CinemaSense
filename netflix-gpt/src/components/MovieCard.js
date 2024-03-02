@@ -1,9 +1,8 @@
-import React, { forwardRef, memo } from "react";
+import React, { forwardRef, memo, useState } from "react";
 import star from "../utils/Svg/star.svg";
 import ChevronUp from "../utils/Svg/ChevronUp.svg";
 import addIcon from "../utils/Svg/addIcon.svg";
 import Genres from "../utils/Genres.json";
-import Checkmark from "../utils/Svg/checkmark.svg";
 import { posterURL } from "../utils/urls";
 import { useAddMovieMutation } from "../utils/list_api";
 import { useSelector } from "react-redux";
@@ -40,15 +39,26 @@ const MovieCard = memo(
     };
     const url = posterURL + poster_path;
     const [addMovie, data] = useAddMovieMutation();
-    const addMovieHandler = () => {
 
+    const addMovieHandler = () => {
       addMovie({ uid: uid, movie: db_movie });
     };
     return (
-      // <div className="relative h-screen flex flex-col justify-center left-[50%]">
       <div className="w-32" ref={ref}>
         <div className="relative group/card bg-black flex flex-col gap-1 hover:scale-110 duration-200 rounded-md  hover:z-50 overflow-hidden flex-shrink-0">
           <img src={url} alt="Img" className="object-cover w-full"></img>
+
+          <div
+            className={`absolute w-full ${
+              data?.isSuccess ? "bg-green-600" : "bg-red-600"
+            } text-white text-base mt-3 ${
+              data.isUninitialized || data?.isLoading ? "hidden" : "visible"
+            }`}
+          >
+            <span className="px-1">
+              {data?.isSuccess ? "Added to List" : "Error! Try Again"}
+            </span>
+          </div>
           <div className="relative hidden group-hover/card:block bg-slate-800 w-full">
             <div className="flex flex-wrap gap-2 items-center">
               <div className="flex gap-1 mx-2 my-2 flex-wrap mb-2">
@@ -59,7 +69,7 @@ const MovieCard = memo(
               </div>
               <div className="group/icon relative flex flex-col gap-2 items-center border rounded-full border-[#808080] hover:border-white">
                 <img
-                  src={Checkmark}
+                  src={addIcon}
                   alt="message-box"
                   className="w-5 h-5"
                   onClick={addMovieHandler}

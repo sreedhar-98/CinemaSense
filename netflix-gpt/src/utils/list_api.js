@@ -24,9 +24,17 @@ const list_api = createApi({
       }),
       invalidatesTags: ["MOVIES"],
     }),
+    removeMovie:build.mutation({
+      query:(body)=>({
+        url:"/remove_movie",
+        method:"PATCH",
+        body:body
+      }),
+      invalidatesTags:["MOVIES"]
+    })
   }),
 });
 
-export const { useGetMoviesDataQuery,useAddMovieMutation } = list_api;
+export const { useGetMoviesDataQuery,useAddMovieMutation,useRemoveMovieMutation } = list_api;
 
 export default list_api;

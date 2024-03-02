@@ -32,7 +32,7 @@ const MyList = () => {
             ))}
           </div>) : (<div className="flex flex-col">
             {data.movies.map((movie)=>(
-              <SearchMovieCard movie={movie} key={movie.id}/>
+              <SearchMovieCard movie={movie} key={movie.id} isAdd={false}/>
             ))}
           </div>)}
       </div>
