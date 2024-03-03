@@ -22,19 +22,36 @@ const list_api = createApi({
         method: "POST",
         body: body,
       }),
+      async onQueryStarted({ uid, movie }, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          dispatch(
+            list_api.util.updateQueryData('getMoviesData',{uid:uid},(draft)=>{
+
+              draft['movies'].push(movie);
+
+            })
+          )
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    }),
+    removeMovie: build.mutation({
+      query: (body) => ({
+        url: "/remove_movie",
+        method: "PATCH",
+        body: body,
+      }),
       invalidatesTags: ["MOVIES"],
     }),
-    removeMovie:build.mutation({
-      query:(body)=>({
-        url:"/remove_movie",
-        method:"PATCH",
-        body:body
-      }),
-      invalidatesTags:["MOVIES"]
-    })
   }),
 });
 
-export const { useGetMoviesDataQuery,useAddMovieMutation,useRemoveMovieMutation } = list_api;
+export const {
+  useGetMoviesDataQuery,
+  useAddMovieMutation,
+  useRemoveMovieMutation,
+} = list_api;
 
 export default list_api;

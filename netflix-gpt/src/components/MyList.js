@@ -1,18 +1,20 @@
 import React from "react";
-import { useGetMoviesDataQuery } from "../utils/list_api";
 import SearchMovieCard from "./SearchMovieCard";
 import { ShimmerContentBlock } from "react-shimmer-effects";
 import BrowseHeader from "./BrowseHeader";
 import HomeNavigate from "./HomeNavigate";
+import { useGetMoviesDataQuery } from "../utils/list_api";
 import { useSelector } from "react-redux";
 
 const MyList = () => {
-  const user_data= useSelector((store)=>store.user);
-
-  const { isFetching, data } = useGetMoviesDataQuery({
-    uid: user_data.data?.uid
-  },{skip:user_data.data?.uid?false:true});
-  if(!data) return;
+  const user_data = useSelector((store) => store.user);
+  const {isFetching,isError,data}=useGetMoviesDataQuery(
+    {
+      uid: user_data.data?.uid,
+    },
+    { skip: user_data.data?.uid ? false : true }
+  );
+  
   return (
     <div className="bg-black min-h-screen flex flex-col gap-3">
       <BrowseHeader childComponent={<HomeNavigate inGPTSearch={false}/>}/>

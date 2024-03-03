@@ -4,7 +4,7 @@ import ChevronUp from "../utils/Svg/ChevronUp.svg";
 import addIcon from "../utils/Svg/addIcon.svg";
 import Genres from "../utils/Genres.json";
 import { posterURL } from "../utils/urls";
-import { useAddMovieMutation } from "../utils/list_api";
+import { useAddMovieMutation, useGetMoviesDataQuery } from "../utils/list_api";
 import { useSelector } from "react-redux";
 
 const MovieCard = memo(
@@ -38,11 +38,20 @@ const MovieCard = memo(
       backdrop_path,
     };
     const url = posterURL + poster_path;
-    const [addMovie, data] = useAddMovieMutation();
+    const [addMovie, status_data] = useAddMovieMutation();
+    const {isFetching,isError,data}=useGetMoviesDataQuery(
+      {
+        uid: user_data.data?.uid,
+      },
+      { skip: user_data.data?.uid ? false : true }
+    );
+
+    console.log(data);
 
     const addMovieHandler = () => {
       addMovie({ uid: uid, movie: db_movie });
     };
+
     return (
       <div className="w-32" ref={ref}>
         <div className="relative group/card bg-black flex flex-col gap-1 hover:scale-110 duration-200 rounded-md  hover:z-50 overflow-hidden flex-shrink-0">
@@ -50,13 +59,15 @@ const MovieCard = memo(
 
           <div
             className={`absolute w-full ${
-              data?.isSuccess ? "bg-green-600" : "bg-red-600"
+              status_data?.isSuccess ? "bg-green-600" : "bg-red-600"
             } text-white text-base mt-3 ${
-              data.isUninitialized || data?.isLoading ? "hidden" : "visible"
+              status_data.isUninitialized || status_data?.isLoading
+                ? "hidden"
+                : "visible"
             }`}
           >
             <span className="px-1">
-              {data?.isSuccess ? "Added to List" : "Error! Try Again"}
+              {status_data?.isSuccess ? "Added to List" : "Error! Try Again"}
             </span>
           </div>
           <div className="relative hidden group-hover/card:block bg-slate-800 w-full">

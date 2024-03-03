@@ -4,10 +4,20 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../utils/firebase";
 import { userIcons } from "../utils/urls";
 import ChevronUp from "../utils/Svg/ChevronUp.svg";
+import { useSelector } from "react-redux";
+import { useGetMoviesDataQuery } from "../utils/list_api";
 
 const UserIcon = () => {
   const [chevron, setChevron] = useState(false);
+  const user_data = useSelector((store) => store.user);
+  useGetMoviesDataQuery(
+    {
+      uid: user_data.data?.uid,
+    },
+    { skip: user_data.data?.uid ? false : true }
+  );
   const navigate = useNavigate();
+
   const handleSignout = () => {
     signOut(auth)
       .then(() => {
