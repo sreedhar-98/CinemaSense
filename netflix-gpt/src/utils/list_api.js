@@ -1,12 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { LIST_BASE_URL } from "./urls";
 
+
 const list_api = createApi({
-  reducerPath: "listApi",
+  reducerPath: "list_api",
   baseQuery: fetchBaseQuery({
     baseUrl: LIST_BASE_URL,
   }),
-  tagTypes: ["MOVIES"],
   endpoints: (build) => ({
     getMoviesData: build.query({
       query: (body) => ({
@@ -14,7 +14,9 @@ const list_api = createApi({
         url: "/get_movies",
         body: body,
       }),
-      providesTags: ["MOVIES"],
+      serializeQueryArgs: ({ queryArgs }) => {
+        return;
+      },
     }),
     addMovie: build.mutation({
       query: (body) => ({
@@ -22,16 +24,18 @@ const list_api = createApi({
         method: "POST",
         body: body,
       }),
-      async onQueryStarted({ uid, movie }, { dispatch, queryFulfilled }) {
+      async onQueryStarted({ movie }, { dispatch, queryFulfilled }) {
         try {
           await queryFulfilled;
           dispatch(
-            list_api.util.updateQueryData('getMoviesData',{uid:uid},(draft)=>{
-
-              draft['movies'].push(movie);
-
-            })
-          )
+            list_api.util.updateQueryData(
+              "getMoviesData",
+              undefined,
+              (draft) => {
+                draft["movies"].push(movie);
+              }
+            )
+          );
         } catch (error) {
           console.log(error);
         }
@@ -43,15 +47,35 @@ const list_api = createApi({
         method: "PATCH",
         body: body,
       }),
-      invalidatesTags: ["MOVIES"],
+      async onQueryStarted({ movie_id }, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          dispatch(
+            list_api.util.updateQueryData(
+              "getMoviesData",
+              undefined,
+              (draft) => {
+                const filtered_movies = draft["movies"].filter(
+                  (movie) => movie?.id !== movie_id
+                );
+                draft["movies"] = filtered_movies;
+              }
+            )
+          );
+        } catch (error) {
+          console.log(error);
+        }
+      },
     }),
   }),
 });
 
 export const {
   useGetMoviesDataQuery,
+  useLazyGetMoviesDataQuery,
   useAddMovieMutation,
   useRemoveMovieMutation,
 } = list_api;
 
 export default list_api;
+

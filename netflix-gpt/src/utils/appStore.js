@@ -15,3 +15,5 @@ const appStore = configureStore({
     getDefaultMiddleware().concat([moviesApi.middleware, list_api.middleware]),
 });
 export default appStore;
+
+
