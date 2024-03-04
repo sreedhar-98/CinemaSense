@@ -18,6 +18,12 @@ const list_api = createApi({
         return;
       },
     }),
+    getAiMovies:build.query({
+      query:(prompt)=>({
+        method:"GET",
+        url:`/get_aimovies?prompt=${prompt}`
+      })
+    }),
     addMovie: build.mutation({
       query: (body) => ({
         url: "/add_data",
@@ -72,6 +78,7 @@ const list_api = createApi({
 
 export const {
   useGetMoviesDataQuery,
+  useLazyGetAiMoviesQuery,
   useLazyGetMoviesDataQuery,
   useAddMovieMutation,
   useRemoveMovieMutation,
