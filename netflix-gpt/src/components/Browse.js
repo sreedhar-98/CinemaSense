@@ -5,7 +5,7 @@ import SecondaryContainer from "./SecondaryContainer";
 
 
 
-const Browse1 = () => {
+const Browse = () => {
   return (
     <div className="bg-black min-h-screen">
      <BrowseHeader childComponent={<PromptInput/>} />
@@ -17,4 +17,4 @@ const Browse1 = () => {
   );
 };
 
-export default Browse1;
+export default Browse;
