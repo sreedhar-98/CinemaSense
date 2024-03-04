@@ -35,7 +35,11 @@ const Body = () => {
     },
     {
       path: "/test",
-      element: <MyList />,
+      element: (
+        <Protected>
+          <MyList />
+        </Protected>
+      ),
     },
   ]);
   const dispatch = useDispatch();

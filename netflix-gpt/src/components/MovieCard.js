@@ -44,10 +44,7 @@ const MovieCard = memo(
     const url = posterURL + poster_path;
     const [addMovie, status_data] = useAddMovieMutation();
 
-    const [trigger,{isUninitialized}] = useLazyGetMoviesDataQuery();
-
-    console.log("Movie Called",movie?.id);
-
+    const [trigger, { isUninitialized,isError,isSuccess,isLoading }] = useLazyGetMoviesDataQuery();
     const addMovieHandler = async () => {
       const { data, isSuccess } = await trigger({ uid: uid }, true);
       if (isSuccess) {
@@ -57,8 +54,7 @@ const MovieCard = memo(
         if (!isExists) {
           addMovie({ uid: uid, movie: db_movie });
           setIsExists(false);
-        }
-        else setIsExists(true);
+        } else setIsExists(true);
       }
     };
 
@@ -70,19 +66,23 @@ const MovieCard = memo(
           {!isExists ? (
             <div
               className={`absolute w-full ${
-                status_data?.isSuccess ? "bg-green-600" : "bg-red-600"
+                (isSuccess && status_data?.isSuccess) ? "bg-green-600" : "bg-red-600"
               } text-white text-base mt-3 ${
-                (status_data.isUninitialized || status_data?.isLoading)
+                ((isUninitialized||isLoading||status_data.isUninitialized || status_data?.isLoading) && (!isError && !status_data?.isError))
                   ? "hidden"
                   : "visible"
               }`}
             >
               <span className="px-1">
-                {status_data?.isSuccess ? "Added to List" : "Error! Try Again"}
+                {( isSuccess && status_data?.isSuccess) ? "Added to List" : "Error! Try Again"}
               </span>
             </div>
           ) : (
-            <div className={`absolute w-full bg-orange-600 text-white text-base mt-3 ${isUninitialized?"hidden":"visible"}`}>
+            <div
+              className={`absolute w-full bg-orange-600 text-white text-base mt-3 ${
+                isUninitialized ? "hidden" : "visible"
+              }`}
+            >
               <span className="px-1 text-wrap">Movie Already in List</span>
             </div>
           )}
