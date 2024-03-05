@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { addUser, removeUser } from "../utils/userSlice";
-import { clearMovies } from "../utils/gptSearchSlice";
 import Protected from "./Protected";
 import MyList from "./MyList";
 
@@ -58,7 +57,6 @@ const Body = () => {
       } else {
         //Signed out
         dispatch(removeUser());
-        dispatch(clearMovies());
       }
     });
     return () => unsubscribe();
