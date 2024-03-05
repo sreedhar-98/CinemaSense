@@ -63,14 +63,19 @@ const MovieList = ({ title, path }) => {
           ref={navRef}
         >
           <div className="relative gap-2 flex flex-shrink-0">
-            {/* {isFetching && <div className="w-32 h-36 bg-gray-600"></div>} */}
             {data?.results?.map((movie, index) => {
               if (data?.results.length === index + 1)
                 return (
                   <MovieCard movie={movie} key={movie.id} ref={scrollRef} />
                 );
-              else return <MovieCard movie={movie} key={movie.id}/>;
+              else return <MovieCard movie={movie} key={movie.id} />;
             })}
+            {/* {isFetching &&
+              Array.from({ length: 3 }).map((_, index) => (
+                <div className="w-32 h-24">
+                <ShimmerPostItem key={`shimmer-${index}`}/>
+                </div>
+              ))} */}
           </div>
         </div>
 
