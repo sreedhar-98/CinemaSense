@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 
 const MyList = () => {
   const user_data = useSelector((store) => store.user);
-  const {isFetching,isError,data}=useGetMoviesDataQuery(
+  const {isFetching,data}=useGetMoviesDataQuery(
     {
       uid: user_data.data?.uid,
     },

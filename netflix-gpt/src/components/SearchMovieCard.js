@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import addIcon from "../utils/Svg/addIcon.svg";
 import removeIcon from "../utils/Svg/removeIcon.svg";
 import { CircularProgressbar } from "react-circular-progressbar";
@@ -17,10 +17,8 @@ const SearchMovieCard = ({ movie, isAdd, id }) => {
   }
 
   const [removeMovie] = useRemoveMovieMutation();
-  const [isExists, setIsExists] = useState(false);
-  const [addMovie, status_data] = useAddMovieMutation();
-  const [trigger, { isUninitialized, isError, isSuccess, isLoading }] =
-    useLazyGetMoviesDataQuery();
+  const [addMovie] = useAddMovieMutation();
+  const [trigger, { isSuccess }] = useLazyGetMoviesDataQuery();
   const user_data = useSelector((store) => store.user.data);
   const uid = user_data?.uid;
   const {
@@ -33,7 +31,6 @@ const SearchMovieCard = ({ movie, isAdd, id }) => {
     original_language,
     backdrop_path,
   } = movie;
-
 
   const db_movie = {
     poster_path,
@@ -51,13 +48,10 @@ const SearchMovieCard = ({ movie, isAdd, id }) => {
     else {
       const { data, isSuccess } = await trigger({ uid: uid }, true);
       if (isSuccess) {
-        const isExists = data?.movies.some(
-          (m) => m?.id === id.toString()
-        );
+        const isExists = data?.movies.some((m) => m?.id === id.toString());
         if (!isExists) {
           addMovie({ uid: uid, movie: db_movie });
-          setIsExists(false);
-        } else setIsExists(true);
+        }
       }
     }
   };
@@ -91,14 +85,18 @@ const SearchMovieCard = ({ movie, isAdd, id }) => {
             </div>
             <div className="group/icon relative flex flex-col gap-2 items-center ml-4">
               <img
-                src={isSuccess?checkIcon : (isAdd ? addIcon : removeIcon)}
+                src={isSuccess ? checkIcon : isAdd ? addIcon : removeIcon}
                 alt="message-box"
                 className="md:w-7 md:h-7 h-4 w-4"
                 onClick={addHandler}
               ></img>
               <div className="absolute bg-[#aaaaaa] rounded-sm -top-6 w-36 text-center hidden group-hover/icon:block">
                 <p className="text-black text-sm">
-                  {isSuccess?"Added to List":((isAdd && !isSuccess)? "Add to My List" : "Remove from My List")}
+                  {isSuccess
+                    ? "Added to List"
+                    : isAdd && !isSuccess
+                    ? "Add to My List"
+                    : "Remove from My List"}
                 </p>
               </div>
             </div>
@@ -106,7 +104,7 @@ const SearchMovieCard = ({ movie, isAdd, id }) => {
           <div className="text-white text-lg mt-5 flex flex-col gap-2">
             <h1 className="font-bold">Overview</h1>
             <div className="w-[100%] ">
-              <p className="md:text-base text-sm">{movie?.overview}</p>
+              <p className="md:text-base text-sm text-wrap">{movie?.overview}</p>
             </div>
           </div>
         </div>

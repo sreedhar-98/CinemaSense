@@ -9,6 +9,7 @@ import {
   useLazyGetMoviesDataQuery,
 } from "../utils/list_api";
 import { useSelector } from "react-redux";
+import MovieModal from "./MovieModal";
 
 const MovieCard = memo(
   forwardRef(({ movie }, ref) => {
@@ -23,6 +24,7 @@ const MovieCard = memo(
       backdrop_path,
     } = movie;
     const user_data = useSelector((store) => store.user.data);
+    const [open,setOpen] =useState(false);
     const [isExists, setIsExists] = useState(false);
     const uid = user_data?.uid;
     const genres_list = Genres.genres;
@@ -59,7 +61,8 @@ const MovieCard = memo(
     };
 
     return (
-      <div className="w-32" ref={ref}>
+      open ? (<MovieModal open={open} movie={db_movie} setOpen={()=>setOpen(false)}/>):
+      (<div className="w-32" ref={ref}>
         <div className="relative group/card bg-black flex flex-col gap-1 hover:scale-110 duration-200 rounded-md  hover:z-50 overflow-hidden flex-shrink-0">
           <img src={url} alt="Img" className="object-cover w-full"></img>
 
@@ -105,7 +108,7 @@ const MovieCard = memo(
                   <p className="text-black text-sm">Add to My List</p>
                 </div>
               </div>
-              <div className="group/moreinfo relative flex flex-col gap-2 items-center ml-auto mr-2 border rounded-full border-[#808080] hover:border-white">
+              <div className="group/moreinfo relative flex flex-col gap-2 items-center ml-auto mr-2 border rounded-full border-[#808080] hover:border-white" onClick={()=>setOpen(true)}>
                 <img
                   src={ChevronUp}
                   alt="ChevronUpIcon"
@@ -123,7 +126,7 @@ const MovieCard = memo(
             </div>
           </div>
         </div>
-      </div>
+      </div>)
     );
   })
 );
