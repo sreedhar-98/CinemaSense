@@ -1,21 +1,65 @@
-import React from "react";
+import React, { useState } from "react";
 import addIcon from "../utils/Svg/addIcon.svg";
 import removeIcon from "../utils/Svg/removeIcon.svg";
 import { CircularProgressbar } from "react-circular-progressbar";
 import { poster_Path } from "../utils/urls";
-import {  useRemoveMovieMutation } from "../utils/list_api";
+import {
+  useAddMovieMutation,
+  useLazyGetMoviesDataQuery,
+  useRemoveMovieMutation,
+} from "../utils/list_api";
 import { useSelector } from "react-redux";
+import checkIcon from "../utils/Svg/checkmark.svg";
 
-const SearchMovieCard = ({ movie, isAdd }) => {
+const SearchMovieCard = ({ movie, isAdd, id }) => {
   if (movie?.metadata) {
     movie = movie.metadata;
   }
 
-  const [removeMovie, removeData] = useRemoveMovieMutation();
+  const [removeMovie] = useRemoveMovieMutation();
+  const [isExists, setIsExists] = useState(false);
+  const [addMovie, status_data] = useAddMovieMutation();
+  const [trigger, { isUninitialized, isError, isSuccess, isLoading }] =
+    useLazyGetMoviesDataQuery();
   const user_data = useSelector((store) => store.user.data);
   const uid = user_data?.uid;
-  const addHandler = () => {
-    removeMovie({ uid: uid,movie_id:movie?.id });
+  const {
+    poster_path,
+    genre_ids,
+    vote_average,
+    overview,
+    original_title,
+    release_date,
+    original_language,
+    backdrop_path,
+  } = movie;
+
+
+  const db_movie = {
+    poster_path,
+    genre_ids,
+    id: id.toString(),
+    vote_average: vote_average.toString(),
+    overview,
+    original_title,
+    release_date,
+    original_language,
+    backdrop_path,
+  };
+  const addHandler = async () => {
+    if (!isAdd) removeMovie({ uid: uid, movie_id: movie?.id });
+    else {
+      const { data, isSuccess } = await trigger({ uid: uid }, true);
+      if (isSuccess) {
+        const isExists = data?.movies.some(
+          (m) => m?.id === id.toString()
+        );
+        if (!isExists) {
+          addMovie({ uid: uid, movie: db_movie });
+          setIsExists(false);
+        } else setIsExists(true);
+      }
+    }
   };
   return (
     <div className="relative md:mx-2 my-[3%] w-[85%] border border-blue-700 rounded-lg">
@@ -47,14 +91,14 @@ const SearchMovieCard = ({ movie, isAdd }) => {
             </div>
             <div className="group/icon relative flex flex-col gap-2 items-center ml-4">
               <img
-                src={isAdd ? addIcon : removeIcon}
+                src={isSuccess?checkIcon : (isAdd ? addIcon : removeIcon)}
                 alt="message-box"
                 className="md:w-7 md:h-7 h-4 w-4"
                 onClick={addHandler}
               ></img>
               <div className="absolute bg-[#aaaaaa] rounded-sm -top-6 w-36 text-center hidden group-hover/icon:block">
                 <p className="text-black text-sm">
-                  {isAdd ? "Add to My List" : "Remove from My List"}
+                  {isSuccess?"Added to List":((isAdd && !isSuccess)? "Add to My List" : "Remove from My List")}
                 </p>
               </div>
             </div>

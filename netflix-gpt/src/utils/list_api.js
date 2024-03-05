@@ -78,7 +78,7 @@ const list_api = createApi({
 
 export const {
   useGetMoviesDataQuery,
-  useLazyGetAiMoviesQuery,
+  useGetAiMoviesQuery,
   useLazyGetMoviesDataQuery,
   useAddMovieMutation,
   useRemoveMovieMutation,

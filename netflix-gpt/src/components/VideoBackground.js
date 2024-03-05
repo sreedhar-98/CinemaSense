@@ -2,17 +2,17 @@ import React from "react";
 import { YouTubeBaseURL } from "../utils/urls";
 
 const VideoBackground = () => {
-  const Trailer = {
-    iso_639_1: "en",
-    iso_3166_1: "US",
-    name: "Escape from Deserter World",
-    key: "41NUykFTZpQ",
-    site: "YouTube",
-    size: 1080,
-    type: "Behind the Scenes",
-    official: true,
-    published_at: "2024-01-27T15:00:05.000Z",
-    id: "65b730280fb17f017b34308f",
+  const Trailer =   {
+    "iso_639_1": "en",
+    "iso_3166_1": "US",
+    "name": "Now Playing",
+    "key": "PoF4B_xPVlg",
+    "site": "YouTube",
+    "size": 1080,
+    "type": "Teaser",
+    "official": true,
+    "published_at": "2023-12-22T17:25:13.000Z",
+    "id": "658734232dffd85c8f44ddf0"
   };
   return (
     <div className="absolute w-full">

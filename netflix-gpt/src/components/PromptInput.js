@@ -1,9 +1,6 @@
 import React, { useCallback, useRef, useState } from "react";
 import useClickOutside from "../utils/Hooks/useClickOutside";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { AWS_URL } from "../utils/urls";
-import { addMovies } from "../utils/gptSearchSlice";
 
 const PromptInput = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -11,23 +8,8 @@ const PromptInput = () => {
   const navigate = useNavigate();
   const refNode = useClickOutside(outsideClickHandler);
   const prompt = useRef();
-  const dispatch = useDispatch();
-  const handleSearchClick = async () => {
-    navigate('/gptSearch');
-    try {
-      if (prompt.current) {
-        const res = await fetch(AWS_URL, {
-          method: "POST",
-          body: JSON.stringify({ prompt: prompt.current.value }),
-        });
-        
-        const data = await res.json();
-        dispatch(addMovies({ movies: data?.data?.matches }));
-        
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  const handleSearchClick = () => {
+    navigate('/gptSearch',{state:{prompt:prompt.current.value}});
   };
 
   return (
@@ -43,6 +25,7 @@ const PromptInput = () => {
         } md:mx-2 my-2 mx-0`}
         placeholder="What would you like to watch today?"
         ref={prompt}
+        required
       ></input>
       <button
         className="bg-blue-500 rounded-lg p-2  border-white border-2 md:mx-2 md:my-2 text-xs md:text-base ml-2 "

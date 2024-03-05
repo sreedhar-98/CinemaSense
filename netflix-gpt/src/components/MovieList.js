@@ -69,7 +69,7 @@ const MovieList = ({ title, path }) => {
                 return (
                   <MovieCard movie={movie} key={movie.id} ref={scrollRef} />
                 );
-              else return <MovieCard movie={movie} key={movie.id} />;
+              else return <MovieCard movie={movie} key={movie.id}/>;
             })}
           </div>
         </div>

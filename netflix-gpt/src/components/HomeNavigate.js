@@ -1,14 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { clearMovies } from "../utils/gptSearchSlice";
-import { useDispatch } from "react-redux";
 
 const HomeNavigate = ({ inGPTSearch }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const homeHandler = () => {
     navigate("/browse");
-    if (inGPTSearch) dispatch(clearMovies());
   };
   return (
     <button
