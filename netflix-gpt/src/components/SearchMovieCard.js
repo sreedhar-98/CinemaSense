@@ -73,10 +73,10 @@ const SearchMovieCard = ({ movie, isAdd, id }) => {
           </h1>
           <div className="flex gap-1 text-white md:text-sm text-xs">
             <span className=""> {movie?.release_date} </span>
-            <p>⚪ {movie?.genre_ids}</p>
+            <p className="text-wrap">⚪ {movie?.genre_ids}</p>
           </div>
           <div className="flex gap-4 text-white mt-6 items-center">
-            <div className="w-20 md:w-28 flex gap-2 items-center">
+            <div className="w-36 md:w-36 flex gap-2 items-center">
               <CircularProgressbar
                 value={parseInt(movie?.vote_average) * 10}
                 text={`${parseInt(movie?.vote_average) * 10}%`}

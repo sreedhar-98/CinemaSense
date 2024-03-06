@@ -70,12 +70,10 @@ const MovieList = ({ title, path }) => {
                 );
               else return <MovieCard movie={movie} key={movie.id} />;
             })}
-            {/* {isFetching &&
+            {isFetching &&
               Array.from({ length: 3 }).map((_, index) => (
-                <div className="w-32 h-24">
-                <ShimmerPostItem key={`shimmer-${index}`}/>
-                </div>
-              ))} */}
+                <div className="animate-pulse flex flex-col space-y-4 p-4 bg-gray-100 rounded-lg w-32 h-44"></div>
+              ))}
           </div>
         </div>
 
