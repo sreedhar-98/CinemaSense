@@ -20,7 +20,7 @@ const MovieList = ({ title, path }) => {
       if (isFetching) return;
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && pageNo < 4) {
+        if (entries[0].isIntersecting && pageNo < 6) {
           setPageNo((prev) => prev + 1);
         }
       });
@@ -72,7 +72,7 @@ const MovieList = ({ title, path }) => {
             })}
             {isFetching &&
               Array.from({ length: 3 }).map((_, index) => (
-                <div className="animate-pulse flex flex-col space-y-4 p-4 bg-gray-100 rounded-lg w-32 h-44"></div>
+                <div className="animate-pulse flex flex-col space-y-4 p-4 bg-gray-100 rounded-lg w-32 h-48"></div>
               ))}
           </div>
         </div>

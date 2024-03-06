@@ -7,7 +7,7 @@ import { bgImage } from "../utils/urls";
 const Login = () => {
 
   return (
-    <div className="relative min-h-screen bg-black w-screen">
+    <div className="relative h-screen bg-black w-screen">
       <Header />
       <img
         src={bgImage}

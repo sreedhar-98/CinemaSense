@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import addIcon from "../utils/Svg/addIcon.svg";
 import removeIcon from "../utils/Svg/removeIcon.svg";
 import { CircularProgressbar } from "react-circular-progressbar";
@@ -10,6 +10,7 @@ import {
 } from "../utils/list_api";
 import { useSelector } from "react-redux";
 import checkIcon from "../utils/Svg/checkmark.svg";
+import { BsFillHandThumbsUpFill } from "react-icons/bs";
 
 const SearchMovieCard = ({ movie, isAdd, id }) => {
   if (movie?.metadata) {
@@ -19,6 +20,7 @@ const SearchMovieCard = ({ movie, isAdd, id }) => {
   const [removeMovie] = useRemoveMovieMutation();
   const [addMovie] = useAddMovieMutation();
   const [trigger, { isSuccess }] = useLazyGetMoviesDataQuery();
+  const [liked,setLiked]=useState(false);
   const user_data = useSelector((store) => store.user.data);
   const uid = user_data?.uid;
   const {
@@ -100,11 +102,16 @@ const SearchMovieCard = ({ movie, isAdd, id }) => {
                 </p>
               </div>
             </div>
+            <div className="cursor-pointer hover:scale-125 ml-9" onClick={()=>setLiked(prev=>!prev)}>
+              <BsFillHandThumbsUpFill size={30} color={liked?"blue":"white"} />
+            </div>
           </div>
           <div className="text-white text-lg mt-5 flex flex-col gap-2">
             <h1 className="font-bold">Overview</h1>
             <div className="w-[100%] ">
-              <p className="md:text-base text-sm text-wrap">{movie?.overview}</p>
+              <p className="md:text-base text-sm text-wrap">
+                {movie?.overview}
+              </p>
             </div>
           </div>
         </div>

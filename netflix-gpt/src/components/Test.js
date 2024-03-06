@@ -1,9 +1,14 @@
-import React from "react";
-
+import React, { useState } from "react";
+import { BsFillHandThumbsUpFill } from "react-icons/bs";
 
 const Test = () => {
+  const [liked,setLiked]=useState(false);
   return (
-    <div className="animate-pulse flex flex-col space-y-4 p-4 bg-gray-100 rounded-lg w-32 h-40">
+    <div className="bg-black">
+      <p>Hit a like </p>
+      <div className="inline-flex items-center justify-center cursor-pointer hover:scale-125" onClick={()=>setLiked(prev=>!prev)}>
+        <BsFillHandThumbsUpFill size={40} color={liked?"blue":"white"}/>
+      </div>
     </div>
   );
 };
