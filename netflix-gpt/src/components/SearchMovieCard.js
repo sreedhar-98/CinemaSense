@@ -23,7 +23,7 @@ const SearchMovieCard = ({ movie, isAdd, id }) => {
   const [addMovie] = useAddMovieMutation();
   const [addLike] = useAddLikeMutation();
   const [trigger_getmovies, get_movies_data] = useLazyGetMoviesDataQuery();
-  const [trigger_getlikes, get_likes_data] = useLazyGetLikesDataQuery();
+  const [trigger_getlikes] = useLazyGetLikesDataQuery();
   const [liked, setLiked] = useState(false);
   const user_data = useSelector((store) => store.user.data);
   const uid = user_data?.uid;
