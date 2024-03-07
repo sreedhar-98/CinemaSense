@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { LIST_BASE_URL } from "./urls";
 
-
 const list_api = createApi({
   reducerPath: "list_api",
   baseQuery: fetchBaseQuery({
@@ -18,11 +17,21 @@ const list_api = createApi({
         return;
       },
     }),
-    getAiMovies:build.query({
-      query:(prompt)=>({
-        method:"GET",
-        url:`/get_aimovies?prompt=${prompt}`
-      })
+    getAiMovies: build.query({
+      query: (prompt) => ({
+        method: "GET",
+        url: `/get_aimovies?prompt=${prompt}`,
+      }),
+    }),
+    getLikesData: build.query({
+      query: (body) => ({
+        method: "POST",
+        url: "/get_likedmovies",
+        body: body,
+      }),
+      serializeQueryArgs: ({ queryArgs }) => {
+        return;
+      },
     }),
     addMovie: build.mutation({
       query: (body) => ({
@@ -36,6 +45,29 @@ const list_api = createApi({
           dispatch(
             list_api.util.updateQueryData(
               "getMoviesData",
+              undefined,
+              (draft) => {
+                draft["movies"].push(movie);
+              }
+            )
+          );
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    }),
+    addLike: build.mutation({
+      query: (body) => ({
+        url: "/add_like",
+        method: "POST",
+        body: body,
+      }),
+      async onQueryStarted({ movie }, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          dispatch(
+            list_api.util.updateQueryData(
+              "getLikesData",
               undefined,
               (draft) => {
                 draft["movies"].push(movie);
@@ -82,7 +114,9 @@ export const {
   useLazyGetMoviesDataQuery,
   useAddMovieMutation,
   useRemoveMovieMutation,
+  useAddLikeMutation,
+  useLazyGetLikesDataQuery,
+  useGetLikesDataQuery,
 } = list_api;
 
 export default list_api;
-

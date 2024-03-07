@@ -1,26 +1,29 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { memo, useCallback, useRef, useState } from "react";
 import MovieCard from "./MovieCard";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { useGetMoviesQuery } from "../utils/moviesApi";
 
-const MovieList = ({ title, path }) => {
+const MovieList = memo(({ title, path, recommend, movieId }) => {
   const [pageNo, setPageNo] = useState(1);
 
   const navRef = useRef();
 
   const observer = useRef();
 
-  const { data, isFetching } = useGetMoviesQuery({
+  const { data, isFetching,isSuccess } = useGetMoviesQuery({
     page: pageNo,
     path: path,
+    recommend: recommend,
+    movie_id: movieId,
   });
 
+console.log(title);
   const scrollRef = useCallback(
     (node) => {
       if (isFetching) return;
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && pageNo < 6) {
+        if (entries[0].isIntersecting && pageNo < 3) {
           setPageNo((prev) => prev + 1);
         }
       });
@@ -29,7 +32,9 @@ const MovieList = ({ title, path }) => {
     },
     [isFetching, pageNo]
   );
-
+  if(isSuccess){
+    if(data?.results.length<5) return;
+  }
   const slide = (direction) => {
     if (direction === "left") {
       if (navRef.current) {
@@ -87,6 +92,6 @@ const MovieList = ({ title, path }) => {
       </div>
     </div>
   );
-};
+});
 
 export default MovieList;

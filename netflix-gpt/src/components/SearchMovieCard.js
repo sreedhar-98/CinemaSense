@@ -4,7 +4,9 @@ import removeIcon from "../utils/Svg/removeIcon.svg";
 import { CircularProgressbar } from "react-circular-progressbar";
 import { poster_Path } from "../utils/urls";
 import {
+  useAddLikeMutation,
   useAddMovieMutation,
+  useLazyGetLikesDataQuery,
   useLazyGetMoviesDataQuery,
   useRemoveMovieMutation,
 } from "../utils/list_api";
@@ -19,8 +21,10 @@ const SearchMovieCard = ({ movie, isAdd, id }) => {
 
   const [removeMovie] = useRemoveMovieMutation();
   const [addMovie] = useAddMovieMutation();
-  const [trigger, { isSuccess }] = useLazyGetMoviesDataQuery();
-  const [liked,setLiked]=useState(false);
+  const [addLike] = useAddLikeMutation();
+  const [trigger_getmovies, get_movies_data] = useLazyGetMoviesDataQuery();
+  const [trigger_getlikes, get_likes_data] = useLazyGetLikesDataQuery();
+  const [liked, setLiked] = useState(false);
   const user_data = useSelector((store) => store.user.data);
   const uid = user_data?.uid;
   const {
@@ -48,13 +52,29 @@ const SearchMovieCard = ({ movie, isAdd, id }) => {
   const addHandler = async () => {
     if (!isAdd) removeMovie({ uid: uid, movie_id: movie?.id });
     else {
-      const { data, isSuccess } = await trigger({ uid: uid }, true);
+      const { data, isSuccess } = await trigger_getmovies({ uid: uid }, true);
       if (isSuccess) {
         const isExists = data?.movies.some((m) => m?.id === id.toString());
         if (!isExists) {
           addMovie({ uid: uid, movie: db_movie });
         }
       }
+    }
+  };
+  const likeHandler = async () => {
+    const { data, isSuccess } = await trigger_getlikes({ uid: uid }, true);
+    if (isSuccess) {
+      const isExists = data?.movies.some((m) => m?.id === id.toString());
+      if (!isExists) {
+        addLike({
+          uid: uid,
+          movie: { id: id.toString(), name: original_title },
+        });
+        setLiked(true);
+      }
+    }
+    else{
+      console.log("Error");
     }
   };
   return (
@@ -87,23 +107,35 @@ const SearchMovieCard = ({ movie, isAdd, id }) => {
             </div>
             <div className="group/icon relative flex flex-col gap-2 items-center ml-4">
               <img
-                src={isSuccess ? checkIcon : isAdd ? addIcon : removeIcon}
+                src={
+                  get_movies_data?.isSuccess
+                    ? checkIcon
+                    : isAdd
+                    ? addIcon
+                    : removeIcon
+                }
                 alt="message-box"
                 className="md:w-7 md:h-7 h-4 w-4"
                 onClick={addHandler}
               ></img>
               <div className="absolute bg-[#aaaaaa] rounded-sm -top-6 w-36 text-center hidden group-hover/icon:block">
                 <p className="text-black text-sm">
-                  {isSuccess
+                  {get_movies_data?.isSuccess
                     ? "Added to List"
-                    : isAdd && !isSuccess
+                    : isAdd && !get_movies_data?.isSuccess
                     ? "Add to My List"
                     : "Remove from My List"}
                 </p>
               </div>
             </div>
-            <div className="cursor-pointer hover:scale-125 ml-9" onClick={()=>setLiked(prev=>!prev)}>
-              <BsFillHandThumbsUpFill size={30} color={liked?"blue":"white"} />
+            <div
+              className="cursor-pointer hover:scale-125 ml-9"
+              onClick={likeHandler}
+            >
+              <BsFillHandThumbsUpFill
+                size={30}
+                color={liked ? "blue" : "white"}
+              />
             </div>
           </div>
           <div className="text-white text-lg mt-5 flex flex-col gap-2">

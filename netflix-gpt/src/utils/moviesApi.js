@@ -14,7 +14,7 @@ const moviesApi = createApi({
   endpoints: (builder) => ({
     getMovies: builder.query({
       query: (params) => ({
-        url: `${params.path.toString()}?language=en-US/&page=${params.page}`,
+        url: !params.recommend?`${params.path.toString()}?language=en-US/&page=${params.page}`:`${params.movie_id}/recommendations?language=en-US/&page=${params.page}`,
       }),
       serializeQueryArgs: ({ queryArgs }) => {
         const args = { ...queryArgs };
