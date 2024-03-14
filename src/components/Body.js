@@ -9,7 +9,6 @@ import { auth } from "../utils/firebase";
 import { addUser, removeUser } from "../utils/userSlice";
 import Protected from "./Protected";
 import MyList from "./MyList";
-import Test from "./Test";
 
 const Body = () => {
   const appRouter = createBrowserRouter([
@@ -41,10 +40,6 @@ const Body = () => {
         </Protected>
       ),
     },
-    {
-      path:"/testing",
-      element:<Test/>
-    }
   ]);
   const dispatch = useDispatch();
   useEffect(() => {

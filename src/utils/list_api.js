@@ -17,6 +17,16 @@ const list_api = createApi({
         return;
       },
     }),
+    createUser:build.query({
+      query:(body)=> ({
+        method:"POST",
+        url:"/create_user",
+        body:body
+      }),
+      serializeQueryArgs: ({ queryArgs }) => {
+        return;
+      },
+    }),
     getAiMovies: build.query({
       query: (prompt) => ({
         method: "GET",
@@ -112,6 +122,7 @@ export const {
   useGetMoviesDataQuery,
   useGetAiMoviesQuery,
   useLazyGetMoviesDataQuery,
+  useLazyCreateUserQuery,
   useAddMovieMutation,
   useRemoveMovieMutation,
   useAddLikeMutation,
