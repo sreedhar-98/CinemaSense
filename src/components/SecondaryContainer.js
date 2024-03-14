@@ -34,7 +34,6 @@ const SecondaryContainer = () => {
   return (
     <div className="flex flex-col flex-shrink-0 md:-mt-40 z-[60] bg-black">
       <MovieList title={"Now Playing"} path={"now_playing"} recommend={false} />
-      <MovieList title={"Popular"} path={"popular"} recommend={false} />
       <MovieList title={"Top Rated"} path={"top_rated"} recommend={false} />
       <MovieList title={"Upcoming"} path={"upcoming"} recommend={false} ref={scrollRef}/>
       {displayedMovies.map((movie)=>(
