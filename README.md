@@ -10,6 +10,8 @@ CinemaSense is an intelligent movie recommendation platform that delivers a pers
 * **MyList:** Save your favorite movies to a personalized watchlist.
 * **Seamless User Experience:** Enjoy a streamlined and intuitive interface built with React.js.
 
+[Project Website](https://main.d2s1nmhyis4n0i.amplifyapp.com/)
+
 ## Technical Overview
 
 * **Frontend:**
