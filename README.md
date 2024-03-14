@@ -29,10 +29,7 @@ CinemaSense is an intelligent movie recommendation platform that delivers a pers
 * **Deployment:**
     * AWS Amplify (for hosting and continuous deployment)
 
-## Installation and Setup 
-
-**Prerequisites:**
-
+## Prerequisites
 * An AWS account with the necessary permissions
 * A Firebase project
 * A TMDb API key 
