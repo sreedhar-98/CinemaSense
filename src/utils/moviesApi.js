@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { BaseVideosURL, AUTH_TMDB } from "./urls";
+import { BaseVideosURL } from "./urls";
 
 const moviesApi = createApi({
   reducerPath: "moviesApi",
@@ -7,7 +7,7 @@ const moviesApi = createApi({
     baseUrl: BaseVideosURL,
     prepareHeaders: (headers, { getState }) => {
       headers.set("accept", "application/json");
-      headers.set("Authorization", `Bearer ${AUTH_TMDB}`);
+      headers.set("Authorization", `Bearer ${process.env.REACT_APP_TMDB_API_KEY}`);
       return headers;
     },
   }),

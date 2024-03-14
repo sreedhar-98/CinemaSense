@@ -6,14 +6,6 @@ export const netflixLogo =
   "https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png";
 export const bgImage =
   "https://assets.nflxext.com/ffe/siteui/vlv3/16006346-87f9-4226-bc25-a1fb346a2b0c/9662d0fd-0547-4665-b887-771617268815/IN-en-20240115-popsignuptwoweeks-perspective_alpha_website_medium.jpg";
-export const API_options = {
-  method: "GET",
-  headers: {
-    accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMzc1MjY4ZTI3OWRlMTY4YTkxZjc1M2Y3ODE0Njc0YSIsInN1YiI6IjY1Yjg5NjIyZjkwYjE5MDE3YzA0NTE0NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.MjFETm2EJ1_CoSb4djS0WYDQV8Xnmf7RrB3SgPuRiog",
-  },
-};
 
 export const nowPlayingURL =
   "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1&include_video=true&mute=1";
@@ -26,11 +18,7 @@ export const addToListIcon = "https://img.icons8.com/ios/50/000000/add--v1.png";
 
 export const posterURL = "http://image.tmdb.org/t/p/w185";
 
-export const AUTH_TMDB = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMzc1MjY4ZTI3OWRlMTY4YTkxZjc1M2Y3ODE0Njc0YSIsInN1YiI6IjY1Yjg5NjIyZjkwYjE5MDE3YzA0NTE0NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.MjFETm2EJ1_CoSb4djS0WYDQV8Xnmf7RrB3SgPuRiog";
-
 export const poster_Path="https://image.tmdb.org/t/p/original";
-
-export const AWS_USER_ENTRY_URL="https://6wutgjhtaeaizj777yjwaq2jpa0kgjnl.lambda-url.ap-south-1.on.aws/";
 
 export const LIST_BASE_URL="https://nrpfe4wakh.execute-api.ap-south-1.amazonaws.com";
 

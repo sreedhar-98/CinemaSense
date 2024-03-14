@@ -1,10 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { LIST_BASE_URL } from "./urls";
+
 
 const list_api = createApi({
   reducerPath: "list_api",
   baseQuery: fetchBaseQuery({
-    baseUrl: LIST_BASE_URL,
+    baseUrl: process.env.REACT_APP_AWS_API_URL,
   }),
   endpoints: (build) => ({
     getMoviesData: build.query({
