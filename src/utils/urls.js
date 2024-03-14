@@ -20,6 +20,5 @@ export const posterURL = "http://image.tmdb.org/t/p/w185";
 
 export const poster_Path="https://image.tmdb.org/t/p/original";
 
-export const LIST_BASE_URL="https://nrpfe4wakh.execute-api.ap-south-1.amazonaws.com";
 
 
