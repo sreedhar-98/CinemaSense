@@ -14,7 +14,7 @@ const PromptInput = () => {
 
   return (
     <div
-      className="relative md:w-[70%] flex md:gap-2 justify-end w-[90%] gap-0"
+      className="relative md:w-[70%] flex md:gap-2 justify-end w-[90%] gap-0 z-[100]"
       ref={refNode}
     >
       <input

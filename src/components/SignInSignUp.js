@@ -75,10 +75,9 @@ const SIgnInSignUp = () => {
     <div className="flex justify-center">
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="absolute flex flex-col w-full mt-24 md:my-auto md:h-full md:p-12 md:bg-black/60 md:rounded-md md:w-2/5 md:mt-20"
+        className="flex flex-col mt-28 mx-auto w-[100%] md:w-[40%]  p-12 bg-black/60 absolute inset-0 rounded-md gap-4"
       >
-        {/* <div className="absolute flex flex-col w-full mt-24 md:w-[414px] md:h-screen md:pt-[60px] md:pb-[40px] md:px-[68px] md:bg-black/60 md:rounded-md md:inset-0  md:mx-auto md:mt-8"> */}
-        <div className="mb-4 ml-4">
+        <div className="ml-4">
           <span className="text-3xl font-bold text-white">
             {!isSignin ? "Sign up" : "Sign In"}
           </span>
@@ -106,20 +105,19 @@ const SIgnInSignUp = () => {
             </p>
           </div>
         )}
-        {/* <div className="mb-4 px-6"> */}
         {!isSignin && (
           <input
             ref={name}
             type="text"
             placeholder="Name"
-            className="bg-[#333] w-10/12 px-6 py-4 mt-4 mb-2 rounded-md mx-4 text-white"
+            className="bg-[#333] w-10/12 px-6 py-4 mt-2 rounded-md mx-4 text-white"
           ></input>
         )}
         <input
           ref={email}
           type="text"
           placeholder="Email or phone number"
-          className="bg-[#333] w-10/12 px-6 py-4 mt-2 mb-2 rounded-md mx-4 text-white"
+          className="bg-[#333] w-10/12 px-6 py-4 rounded-md mx-4 text-white"
         ></input>
         {emailError.length !== 0 && (
           <span className="text-base text-orange-500 mx-4">{emailError}</span>
@@ -128,7 +126,7 @@ const SIgnInSignUp = () => {
           ref={password}
           type="password"
           placeholder="Password"
-          className="w-10/12 bg-[#333333] px-6 py-4 mx-4 mt-2 rounded-md text-white"
+          className="w-10/12 bg-[#333333] px-6 py-4 mx-4 rounded-md text-white"
         ></input>
         {passwordError.length !== 0 && (
           <span className="text-base text-orange-500 my-1 mx-4">
@@ -139,7 +137,7 @@ const SIgnInSignUp = () => {
 
         <button
           onClick={handleButtonClick}
-          className="w-10/12 bg-red-600 text-center text-white text-xl px-6 py-3 mx-4 mt-10 mb-2 rounded-md"
+          className="w-10/12 bg-red-600 text-center text-white text-xl px-6 py-3 mx-4 mt-4 rounded-md"
         >
           {!isSignin ? "Sign up" : "Sign In"}
         </button>
@@ -154,7 +152,7 @@ const SIgnInSignUp = () => {
             </span>
           </div>
         )}
-        <div className="flex gap-1 mx-4 mt-6">
+        <div className="flex gap-1 mx-4 mt-2">
           <span className="text-gray-500">
             {isSignin ? "New to Netflix ?" : "Already Registered ?"}
           </span>

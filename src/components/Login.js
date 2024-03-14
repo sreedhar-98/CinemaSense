@@ -7,12 +7,12 @@ import { bgImage } from "../utils/urls";
 const Login = () => {
 
   return (
-    <div className="relative h-screen bg-black w-screen">
+    <div className="relative h-screen bg-black w-full">
       <Header />
       <img
         src={bgImage}
         alt="bgimage"
-        className="absolute md:block hidden opacity-60"
+        className="w-full h-screen object-cover md:block hidden opacity-60"
       ></img>
       <SIgnInSignUp />
     </div>

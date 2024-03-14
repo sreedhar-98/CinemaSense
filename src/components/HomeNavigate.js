@@ -8,7 +8,7 @@ const HomeNavigate = ({ inGPTSearch }) => {
   };
   return (
     <button
-      className="md:px-6 md:py-3 px-2 py-1 text-white font-semibold rounded-lg text-xs sm:text-sm md:text-md lg:text-lg border border-white bg-blue-500 mr-4"
+      className="md:px-6 md:py-3 px-2 py-1 text-white font-semibold rounded-lg text-xs sm:text-sm md:text-md lg:text-lg border border-white bg-blue-500 mr-4 z-[100]"
       onClick={homeHandler}
     >
       Home

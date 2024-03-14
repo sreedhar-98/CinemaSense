@@ -6,7 +6,7 @@ const Header = () => {
  
 
   return (
-    <div className="absolute bg-gradient-to-b from-black w-full">
+    <div className="flex md:flex-row items-center md:px-6 py-1 w-full absolute bg-gradient-to-b from-black justify-between z-50">
       <img
         src={netflixLogo}
         alt="Logo"
